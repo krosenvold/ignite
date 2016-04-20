@@ -396,7 +396,7 @@ public class CacheContinuousQueryOperationFromCallbackTest extends GridCommonAbs
      */
     private void checkEvents(final Set<T2<QueryTestKey, QueryTestValue>> set, final int expCnt, IgniteCache cache,
         boolean cb) throws Exception {
-        assertTrue(GridTestUtils.waitForCondition(new PA() {
+        assertTrue("Expected size: " + expCnt + ", actual: " + set.size(), GridTestUtils.waitForCondition(new PA() {
             @Override public boolean apply() {
                 return set.size() >= expCnt;
             }

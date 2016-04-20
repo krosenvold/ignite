@@ -465,12 +465,12 @@ public class GridDhtAtomicUpdateRequest extends GridCacheMessage implements Grid
     }
 
     /**
-     * @param idx Update counter index.
+     * @param updCntr Update counter.
      * @return Update counter.
      */
-    public Long updateCounter(int idx) {
-        if (updateCntrs != null && idx < updateCntrs.size())
-            return updateCntrs.get(idx);
+    public Long updateCounter(int updCntr) {
+        if (updateCntrs != null && updCntr < updateCntrs.size())
+            return updateCntrs.get(updCntr);
 
         return null;
     }

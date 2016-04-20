@@ -731,7 +731,7 @@ public class IgniteConfiguration {
      * Size of thread pool that is in charge of processing asynchronous callbacks.
      * <p>
      * This pool will be used for case when need to perform cache operation in callbacks but in system thread is not
-     * safe (potential deadlock, starvation and etc) for example {@link ContinuousQuery}.
+     * safe (potential deadlock, starvation and etc). For example {@link ContinuousQuery}.
      * <p>
      * If not provided, executor service will have size {@link #DFLT_PUBLIC_THREAD_CNT}.
      *
