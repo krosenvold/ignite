@@ -94,9 +94,9 @@ import org.apache.ignite.lang.IgniteAsyncCallback;
  * be empty in this case, but it will still unregister listeners when {@link QueryCursor#close()}
  * is called.
  * <p>
- * Continuous query supports {@link IgniteAsyncCallback} annotation. In this case
- * invocation of local listener and remote filter will be executing in non-system thread that
- * allow to use cache operations inside of implementations.
+ * {@link CacheEntryEventFilter} and {@link CacheEntryUpdatedListener} support {@link IgniteAsyncCallback} annotation.
+ * If they are annotated in this case invocation of local listener and remote filter will be executing in non-system
+ * thread that allow to use cache operations inside of implementations.
  *
  * @see IgniteAsyncCallback
  */
