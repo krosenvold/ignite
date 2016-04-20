@@ -735,7 +735,7 @@ public class IgniteConfiguration {
      * <p>
      * If not provided, executor service will have size {@link #DFLT_PUBLIC_THREAD_CNT}.
      *
-     * @return Thread pool size to be used
+     * @return Thread pool size to be used.
      * @see IgniteAsyncCallback
      */
     public int getAsyncCallbackPoolSize() {
