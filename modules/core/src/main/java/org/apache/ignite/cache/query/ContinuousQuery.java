@@ -213,7 +213,6 @@ public final class ContinuousQuery<K, V> extends Query<Cache.Entry<K, V>> {
      * <p>
      * If remote filter has {@link IgniteAsyncCallback} annotation then invocation of the filter
      * will be executed in non-system thread that allow to perform a cache operations from implementation.
-     * For asynchronous notification also guaranteed ordering events for key.
      *
      * @param rmtFilter Key-value filter.
      * @return {@code this} for chaining.
@@ -247,7 +246,6 @@ public final class ContinuousQuery<K, V> extends Query<Cache.Entry<K, V>> {
      * <p>
      * If remote filter has {@link IgniteAsyncCallback} annotation then invocation of the filter
      * will be executed in non-system thread that allow to perform a cache operations from implementation.
-     * For asynchronous notification also guaranteed ordering events for key.
      *
      * @param rmtFilterFactory Key-value filter factory.
      * @return {@code this} for chaining.

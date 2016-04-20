@@ -34,9 +34,8 @@ import org.apache.ignite.configuration.IgniteConfiguration;
  * for {@link ContinuousQuery}.
  * <p>
  * For example, if {@link CacheEntryEventFilter filter} or {@link CacheEntryListener}
- * annotated this annotation then they will be executing to asyncCallback thread pool. It allows to use cache API
- * in a callbacks. This thread pool which can be configured by
- * {@link IgniteConfiguration#setAsyncCallbackPoolSize(int)}
+ * has the annotation then callbacks will be executing to asyncCallback thread pool. It allows to use cache API
+ * in a callbacks. This thread pool can be configured by  {@link IgniteConfiguration#setAsyncCallbackPoolSize(int)}.
  * <h1 class="header">Example</h1>
  * As an example, suppose we have cache with {@code 'Person'} objects and we need
  * to query all persons with salary above then 1000. Also remote filter will update some entries.
