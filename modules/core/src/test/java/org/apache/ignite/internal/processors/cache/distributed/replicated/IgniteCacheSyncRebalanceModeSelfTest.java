@@ -113,4 +113,53 @@ public class IgniteCacheSyncRebalanceModeSelfTest extends GridCommonAbstractTest
         for (int i = 0; i < CNT; i++)
             assertEquals(i, ignite2.cache(cacheName).localPeek(i));
     }
+
+    /**
+     * @throws Exception if failed.
+     */
+    public void testDynamicCache_3_nodes() throws Exception {
+        final int CNT = 100_000_0;
+
+        IgniteEx ignite = startGrid(0);
+
+        String cacheName = "dynamic";
+
+        CacheConfiguration<Object, Object> ccfg = new CacheConfiguration<>(cacheName);
+
+        ccfg.setCacheMode(CacheMode.REPLICATED);
+        ccfg.setRebalanceMode(CacheRebalanceMode.SYNC);
+
+        IgniteCache<Object, Object> cache = ignite.createCache(ccfg);
+
+        try (IgniteDataStreamer<Object, Object> streamer = ignite.dataStreamer(cacheName)) {
+            streamer.allowOverwrite(true);
+
+            for (int i = 0; i < CNT; i++)
+                streamer.addData(i, i);
+        }
+
+        assertEquals(CNT, cache.localSize());
+
+        Ignite ignite2 = startGrid(1);
+
+        assertEquals(CNT, ignite2.cache(cacheName).localSize(CachePeekMode.PRIMARY, CachePeekMode.BACKUP));
+
+        for (int i = 0; i < CNT; i++)
+            assertEquals(i, ignite2.cache(cacheName).localPeek(i));
+
+        Ignite ignite3 = startGrid(2);
+
+        assertEquals(CNT, ignite3.cache(cacheName).localSize(CachePeekMode.PRIMARY, CachePeekMode.BACKUP));
+
+        for (int i = 0; i < CNT; i++)
+            assertEquals(i, ignite3.cache(cacheName).localPeek(i));
+
+        Ignite ignite4 = startGrid(4);
+
+        assertEquals(CNT, ignite4.cache(cacheName).localSize(CachePeekMode.PRIMARY, CachePeekMode.BACKUP));
+
+        for (int i = 0; i < CNT; i++)
+            assertEquals(i, ignite4.cache(cacheName).localPeek(i));
+
+    }
 }
