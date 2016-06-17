@@ -18,7 +18,8 @@
 package org.apache.ignite.spi.discovery.tcp.ipfinder;
 
 import java.net.InetSocketAddress;
-import java.util.Collection;
+import java.util.*;
+
 import org.apache.ignite.Ignite;
 import org.apache.ignite.internal.util.tostring.GridToStringExclude;
 import org.apache.ignite.internal.util.typedef.internal.S;
@@ -114,5 +115,24 @@ public abstract class TcpDiscoveryIpFinderAdapter implements TcpDiscoveryIpFinde
      */
     protected IgniteSpiContext spiContext() {
         return spiCtx;
+    }
+
+	/**
+     * Ensures that the supplied collection only contains distinct ip address/port combinations
+     * @param src The supplied addresses
+     * @return the supplied addresses, filtered for duplicates
+     */
+    protected  Collection<InetSocketAddress> distinct(Collection<InetSocketAddress> src){
+        List<InetSocketAddress> result = new ArrayList<>();
+        Set<String> seen = new HashSet<>();
+        for (InetSocketAddress addr : src) {
+            String ipPort = addr.getAddress().getHostAddress() + ":" + addr.getPort();
+            if (!seen.contains(ipPort))  {
+                result.add( addr);
+                seen.add(ipPort);
+
+            }
+        }
+        return result;
     }
 }

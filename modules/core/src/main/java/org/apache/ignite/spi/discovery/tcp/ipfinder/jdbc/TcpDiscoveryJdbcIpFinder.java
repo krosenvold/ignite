@@ -173,7 +173,7 @@ public class TcpDiscoveryJdbcIpFinder extends TcpDiscoveryIpFinderAdapter {
             stmtUnreg = conn.prepareStatement(unregAddrQry);
             stmtReg = conn.prepareStatement(regAddrQry);
 
-            for (InetSocketAddress addr : addrs) {
+            for (InetSocketAddress addr : distinct(addrs)) {
                 stmtUnreg.setString(1, addr.getAddress().getHostAddress());
                 stmtUnreg.setInt(2, addr.getPort());
 
@@ -231,7 +231,7 @@ public class TcpDiscoveryJdbcIpFinder extends TcpDiscoveryIpFinderAdapter {
 
             stmt = conn.prepareStatement(unregAddrQry);
 
-            for (InetSocketAddress addr : addrs) {
+            for (InetSocketAddress addr : distinct(addrs)) {
                 stmt.setString(1, addr.getAddress().getHostAddress());
                 stmt.setInt(2, addr.getPort());
 

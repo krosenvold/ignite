@@ -225,7 +225,7 @@ public class TcpDiscoverySharedFsIpFinder extends TcpDiscoveryIpFinderAdapter {
         initFolder();
 
         try {
-            for (InetSocketAddress addr : addrs) {
+            for (InetSocketAddress addr : distinct(addrs)) {
                 File file = new File(folder, name(addr));
 
                 file.createNewFile();
@@ -243,7 +243,7 @@ public class TcpDiscoverySharedFsIpFinder extends TcpDiscoveryIpFinderAdapter {
         initFolder();
 
         try {
-            for (InetSocketAddress addr : addrs) {
+            for (InetSocketAddress addr : distinct(addrs)) {
                 File file = new File(folder, name(addr));
 
                 if (!file.delete())
